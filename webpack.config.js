@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 
 let mode = 'development';
@@ -17,7 +18,7 @@ const plugins = [
 	new HtmlWebpackPlugin({
 		template: "./src/index.html"
 	}),
-
+	// new BundleAnalyzerPlugin()
 ];
 
 // switch the mode between development and production
@@ -56,6 +57,13 @@ module.exports = {
 					loader: "babel-loader"
 				}
 			},
+			{
+				test: /\.tsx?$/i,
+				exclude: /node_modules/,
+				use: {
+					loader: "ts-loader"
+				}
+			},
 			// mini-css-extract-plugin used to extract the compiled css file as seperated file, and it take place of the style-loader, which import css file in js file, while css-loader will execute firstly and then style-loader
 			{
 				test: /\.(s[ac]|c)ss$/i,
@@ -90,7 +98,7 @@ module.exports = {
 
 	// let webpack know about jsx file
 	resolve: {
-		extensions: ['.js', '.jsx']
+		extensions: ['.js', '.jsx', '.ts', '.tsx']
 	},
 
 	devServer: {
