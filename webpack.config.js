@@ -1,6 +1,10 @@
 
-
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+
 
 let mode = 'development';
 // here solve the problems of the browser cannot hot load after scss change
@@ -20,6 +24,7 @@ module.exports = {
 	target: target,
 
 	output: {
+		path: path.resolve(__dirname, 'dist'),
 		assetModuleFilename: "images/[hash][ext][query]"
 	},
 
@@ -68,8 +73,12 @@ module.exports = {
 	},
 
 	plugins: [
+		new CleanWebpackPlugin(),
 		// mini-css-extract-plugin used to extract the compiled css file as seperated file,
-		new MiniCssExtractPlugin()
+		new MiniCssExtractPlugin(),
+		new HtmlWebpackPlugin({
+			template: "./src/index.html"
+		})
 	],
 
 	// let webpack know about jsx file
