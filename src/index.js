@@ -5,4 +5,10 @@ const obj = {
 	last: 5
 }
 
-console.log(obj);
+const sheep = {
+	...obj,
+	grass: true,
+	eat: false
+}
+
+console.log(sheep);
