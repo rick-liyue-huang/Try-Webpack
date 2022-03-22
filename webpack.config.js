@@ -3,18 +3,30 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 
 let mode = 'development';
 // here solve the problems of the browser cannot hot load after scss change
 let target = 'web';
 
+const plugins = [
+	new CleanWebpackPlugin(),
+	// mini-css-extract-plugin used to extract the compiled css file as seperated file,
+	new MiniCssExtractPlugin(),
+	new HtmlWebpackPlugin({
+		template: "./src/index.html"
+	}),
+
+];
+
 // switch the mode between development and production
 if (process.env.NODE_ENV === 'production') {
 	mode = 'production'
+	target = 'browserslist';
 
-	target = 'browserslist'
+} else {
+	plugins.push(new ReactRefreshWebpackPlugin())
 }
 
 
@@ -22,6 +34,8 @@ module.exports = {
 	mode: mode,
 
 	target: target,
+
+	entry: './src/index.js',
 
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -72,14 +86,7 @@ module.exports = {
 		]
 	},
 
-	plugins: [
-		new CleanWebpackPlugin(),
-		// mini-css-extract-plugin used to extract the compiled css file as seperated file,
-		new MiniCssExtractPlugin(),
-		new HtmlWebpackPlugin({
-			template: "./src/index.html"
-		})
-	],
+	plugins: plugins,
 
 	// let webpack know about jsx file
 	resolve: {
