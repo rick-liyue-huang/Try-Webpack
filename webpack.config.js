@@ -14,11 +14,14 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 
-
 module.exports = {
 	mode: mode,
 
 	target: target,
+
+	output: {
+		assetModuleFilename: "images/[hash][ext][query]"
+	},
 
 	// use as production mode, and no sourceMap, which can solve the problem of source code location, sourceMap is the info file, in which has the source location info, and easy to get the compile error location. If set devtool: true, or comment devtool, the dist/main.js will contain more info.
 	devtool: 'source-map',
@@ -39,7 +42,27 @@ module.exports = {
 				test: /\.(s[ac]|c)ss$/i,
 				// sass-loader used to deal with the scss file
 				// postcss-loader needs to config with postcss.config.js and .browserslistrc file, it will create the css file with prefix
-				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+				use: [
+					{
+						loader: MiniCssExtractPlugin.loader,
+						options: {publicPath: ''}
+					},
+					'css-loader',
+					'postcss-loader',
+					'sass-loader'
+				]
+			},
+
+			{
+				test: /\.(png|jpg|jpeg|gif|svg)$/i,
+				type: "asset", // will automatically inject the image or seperated image by size
+				// type: "asset/resource", // will create seperated image file
+				// type: "asset/inline", // for the smallest image and this image will inject js file
+				parser: {
+					dataUrlCondition: {
+						maxSize: 30 * 1024 // manual confirm the injected image to js by size
+					}
+				}
 			}
 		]
 	},
