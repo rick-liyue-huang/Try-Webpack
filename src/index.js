@@ -1,4 +1,6 @@
 
+import './styles/index.scss'
+
 const obj = {
 	first :1,
 	second: 2,
