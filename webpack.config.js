@@ -26,7 +26,7 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/,
+				test: /\.jsx?$/,
 				exclude: /node_modules/,
 				use: {
 					// babel-loader will transfer the es6 or es7 standard to es5 or lower standard coding style
@@ -36,7 +36,7 @@ module.exports = {
 			},
 			// mini-css-extract-plugin used to extract the compiled css file as seperated file, and it take place of the style-loader, which import css file in js file, while css-loader will execute firstly and then style-loader
 			{
-				test: /\.s?css$/i,
+				test: /\.(s[ac]|c)ss$/i,
 				// sass-loader used to deal with the scss file
 				// postcss-loader needs to config with postcss.config.js and .browserslistrc file, it will create the css file with prefix
 				use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
@@ -48,6 +48,11 @@ module.exports = {
 		// mini-css-extract-plugin used to extract the compiled css file as seperated file,
 		new MiniCssExtractPlugin()
 	],
+
+	// let webpack know about jsx file
+	resolve: {
+		extensions: ['.js', '.jsx']
+	},
 
 	devServer: {
 		// let the webpack serve to locate on http://localhost:8080, before is http://localhost:8080/dist/
