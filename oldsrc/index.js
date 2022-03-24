@@ -15,7 +15,7 @@ import { sum } from './math'
 const sumRes = sum(10, 20)
 console.log('sumRes', sumRes)
 
-// 引入图片
+// import image
 function insertImgElem(imgFile) {
     const img = new Image()
     img.src = imgFile

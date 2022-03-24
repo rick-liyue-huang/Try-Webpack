@@ -1,4 +1,4 @@
-// 引入 css
+// import css
 import './style/style2.less'
 
 import { sum } from './math'

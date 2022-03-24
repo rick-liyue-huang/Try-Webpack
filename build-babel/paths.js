@@ -1,6 +1,6 @@
 /**
- * @description 常用文件夹路径
- * @author 双越
+ * @description common directory
+ * @author rickH
  */
 
 const path = require('path')

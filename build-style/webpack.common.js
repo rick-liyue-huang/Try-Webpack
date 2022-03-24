@@ -12,19 +12,14 @@ module.exports = {
                 include: srcPath,
                 exclude: /node_modules/
             },
-            // {
-            //     test: /\.css$/,
-            //     // loader 的执行顺序是：从后往前
-            //     use: ['style-loader', 'css-loader']
-            // },
             {
                 test: /\.css$/,
-                // loader 的执行顺序是：从后往前
-                use: ['style-loader', 'css-loader', 'postcss-loader'] // 加了 postcss
+
+                use: ['style-loader', 'css-loader', 'postcss-loader']
             },
             {
                 test: /\.less$/,
-                // 增加 'less-loader' ，注意顺序
+
                 use: ['style-loader', 'css-loader', 'less-loader']
             }
         ]

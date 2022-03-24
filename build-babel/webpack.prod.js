@@ -8,12 +8,12 @@ const { srcPath, distPath } = require('./paths')
 module.exports = merge(webpackCommonConf, {
     mode: 'production',
     output: {
-        filename: 'bundle.[contenthash:8].js',  // 打包代码时，加上 hash 戳
+        filename: 'bundle.[contenthash:8].js',  // add hash stamp
         path: distPath,
-        // publicPath: 'http://cdn.abc.com'  // 修改所有静态文件 url 的前缀（如 cdn 域名），这里暂时用不到
+        // publicPath: 'http://cdn.abc.com'  // modify all static file url prefix（eg cdn domain name）
     },
     plugins: [
-        new CleanWebpackPlugin(), // 会默认清空 output.path 文件夹
+        new CleanWebpackPlugin(), // clean output.path directory
         new webpack.DefinePlugin({
             // window.ENV = 'production'
             ENV: JSON.stringify('production')

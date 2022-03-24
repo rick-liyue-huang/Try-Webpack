@@ -19,12 +19,12 @@ module.exports = merge(webpackCommonConf, {
         open: true,  // 自动打开浏览器
         compress: true,  // 启动 gzip 压缩
 
-        // 设置代理
+        // set proxy
         proxy: {
-            // 将本地 /api/xxx 代理到 localhost:3000/api/xxx
+            // set /api/xxx proxy to localhost:3000/api/xxx
             '/api': 'http://localhost:3000',
 
-            // 将本地 /api2/xxx 代理到 localhost:3000/xxx
+            // set /api2/xxx proxy to localhost:3000/xxx
             '/api2': {
                 target: 'http://localhost:3000',
                 pathRewrite: {

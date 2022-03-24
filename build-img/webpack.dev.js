@@ -8,7 +8,7 @@ module.exports = merge(webpackCommonConf, {
     mode: 'development',
     module: {
         rules: [
-            // 直接引入图片 url
+            // load image by file-loader
             {
                 test: /\.(png|jpg|jpeg|gif)$/,
                 use: 'file-loader'
@@ -23,17 +23,17 @@ module.exports = merge(webpackCommonConf, {
     ],
     devServer: {
         port: 8080,
-        progress: true,  // 显示打包的进度条
-        contentBase: distPath,  // 根目录
-        open: true,  // 自动打开浏览器
-        compress: true,  // 启动 gzip 压缩
+        progress: true,  // show packing process bar
+        contentBase: distPath,  // root directory
+        open: true,  // open browser automatically
+        compress: true,  // open gzip compressing
 
         // 设置代理
         proxy: {
-            // 将本地 /api/xxx 代理到 localhost:3000/api/xxx
+             // set /api/xxx proxy to localhost:3000/api/xxx
             '/api': 'http://localhost:3000',
 
-            // 将本地 /api2/xxx 代理到 localhost:3000/xxx
+            // set /api2/xxx proxy to localhost:3000/xxx
             '/api2': {
                 target: 'http://localhost:3000',
                 pathRewrite: {
